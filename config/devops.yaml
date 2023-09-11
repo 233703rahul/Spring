@@ -1,0 +1,22 @@
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins
+spec:
+  containers:
+    - name: jenkins
+      image: jenkins/jenkins:lts
+      env:
+      - name: JENKINS_HOME
+        value: /var/jenkins_home
+      ports:
+      - containerPort: 8080
+        name: jenkins-port
+      volumeMounts:
+      - name: jenkins-home
+        mountPath: /var/jenkins_home
+  volumes:
+    - name: jenkins-home
+      emptyDir: {}
